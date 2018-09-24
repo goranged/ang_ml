@@ -95,8 +95,7 @@ options = optimset('GradObj', 'on', 'MaxIter', 400);
 
 %  Run fminunc to obtain the optimal theta
 %  This function will return theta and the cost 
-[theta, cost] = ...
-	fminunc(@(t)(costFunction(t, X, y)), initial_theta, options);
+[theta, cost] = fminunc(@(t)(costFunction(t, X, y)), initial_theta, options);
 
 % Print theta to screen
 fprintf('Cost at theta found by fminunc: %f\n', cost);
@@ -137,8 +136,7 @@ pause;
 %  and score 85 on exam 2 
 
 prob = sigmoid([1 45 85] * theta);
-fprintf(['For a student with scores 45 and 85, we predict an admission ' ...
-         'probability of %f\n'], prob);
+fprintf(['For a student with scores 45 and 85, we predict an admission probability of %f\n'], prob);
 fprintf('Expected value: 0.775 +/- 0.002\n\n');
 
 % Compute accuracy on our training set
