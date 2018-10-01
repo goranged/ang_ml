@@ -25,8 +25,9 @@ freg = lambda / (2 * m) * sum(theta(2:n) .^ 2);
 
 J = ((1 / m) * ((-y' * log(h)) - ((1 .- y)' * log(1 - h)))) + freg;
 
-%grad requires fixing
-grad = ((1/m) .* X(:,2:n)' * (sigmoid(X(:,2:n) * theta(2:n)) - y)) + ((lambda / m) * sum(theta(2:n)));
+temp = theta;
+temp(1) = 0;
+grad = grad + ((lambda / m) .* temp);
 
 % =============================================================
 
