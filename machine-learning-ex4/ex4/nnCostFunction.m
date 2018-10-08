@@ -39,6 +39,52 @@ Theta2_grad = zeros(size(Theta2));
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
 %
+
+a1 = X;
+z2 = [ones(m, 1) a1] * Theta1';
+a2 = sigmoid(z2);
+z3 = [ones(m, 1) a2] * Theta2';
+a3 = sigmoid(z3);
+h = a3;
+
+
+%-- Creating Y Matrix --%
+Y = zeros(m,num_labels);
+for i=1:m
+    for k = 1:num_labels
+        Y(i,k) = (y(i) == k);
+    end
+end
+
+%-- Forward Propagation --%
+c=0;
+for i = 1:m
+    for k = 1:num_labels
+        c = c + ((-(y(i)==k) * log(h(i,k))) - ((1 - (y(i)==k)) * log(1 - h(i,k))));
+    end
+
+    %-- Back Propagation --%
+
+end
+
+
+% -- Regularization --%
+r = 0;
+for j=1:hidden_layer_size
+    for k = 2:input_layer_size + 1
+        r = r + (Theta1(j,k) ^ 2);
+    end
+end
+for j=1:num_labels
+    for k = 2:hidden_layer_size + 1
+        r = r + (Theta2(j,k) ^ 2);
+    end
+end
+
+J1 = (1 / m * c);
+J2 = (lambda / (2 * m) * r);
+J = J1 + J2;
+
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
 %         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
@@ -61,26 +107,7 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% -------------------------------------------------------------
+% -------------------------------------------------------------%
 
 % =========================================================================
 
