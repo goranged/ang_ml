@@ -19,19 +19,22 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
+%''' Square errors and cost'''
+H = ((X * theta) - y); 
+J1 = (H' * H) / (2 * m);
 
+%''' Regularization '''
+R1 = (lambda / (2 * m)) * (theta(2:end,:)' * theta(2:end,:));
 
+%''' Regularized cost '''
+J = J1 + R1;
 
+%''' Calculating regularized gradient - non optimized '''
+G1 = (X(:,1:1)' * H)/m;
+G2 = (X(:,2:end)' * H)/m;
+R2 = (lambda/m) .* (theta(2:end,:));
+grad = [G1;G2 + R2];
 
-
-
-
-
-
-
-
-% =========================================================================
-
-grad = grad(:);
+% ========================================================================= %
 
 end
